@@ -12,6 +12,7 @@ general {
 }
 
 order += "volume master"
+order += "backlight"
 order += "load"
 order += "cpu_usage"
 order += "cpu_temperature 0"
@@ -60,7 +61,7 @@ disk "/" {
 }
 
 wireless wlp1s0 {
-	format_up = " W: (%quality at %essid) %ip "
+	format_up = " W:%quality on %essid "
 	format_down = " ☡ WiFi "
 }
 
