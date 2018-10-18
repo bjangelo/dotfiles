@@ -139,8 +139,9 @@ function! LoadCtags()
 endfunction
 au BufEnter /* call LoadCtags()
 
-"function! UpdateTags()
-"  execute ":!ctags -R && find . -name \"*.[ch]\" -o -name \"*.go\" -o -name \"*.py\" -o -name \"*.cpp\" -o -name \"*.hpp\" -o -name \"*.cc\" | xargs cscope -b -k -q"
-"  call LoadCscope()
-"endfunction
-"nnoremap <leader>u :call UpdateTags()<CR>
+function! UpdateTags()
+  execute ":!ctags -R && find . -name \"*.[ch]\" -o -name \"*.go\" -o -name \"*.py\" -o -name \"*.cpp\" -o -name \"*.hpp\" -o -name \"*.cc\" | xargs cscope -b -k -q"
+  call LoadCscope()
+  call LoadCtags()
+endfunction
+nnoremap <leader>uu :call UpdateTags()<CR>
