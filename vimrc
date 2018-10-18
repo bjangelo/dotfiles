@@ -85,8 +85,6 @@ endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
-set runtimepath^=~/.vim/bundle/tagbar
-
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprevious<CR>
 
