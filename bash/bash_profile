@@ -1,0 +1,9 @@
+if [ -z "$SSH_AUTH_SOCK" ]; then
+        eval $(/usr/bin/ssh-agent -s)
+        ssh-add ~/.ssh/id_ed25519
+fi
+
+export EDITOR=vim
+export GTK_THEME=NordArc
+
+[ -f ~/.bashrc ] && . ~/.bashrc

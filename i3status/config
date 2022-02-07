@@ -1,0 +1,85 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+	colors = true
+	interval = 5
+	color_good = "#81a1c1" # Light green
+	color_degraded = "#fafe7c" # Light yellow
+	color_bad = "#ff7770" # Light red
+}
+
+order += "volume master"
+order += "load"
+order += "memory"
+order += "disk /"
+order += "run_watch VPN"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery 0"
+order += "tztime local"
+
+volume master {
+	format = "  %volume"
+	format_muted = "  %volume"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+load {
+	format = "  %1min "
+}
+
+memory {
+	format = "  %used "
+	threshold_degraded = "1G"
+	format_degraded = "  < %available "
+}
+
+disk "/" {
+	format = "  %free "
+	#format = "  %free "
+}
+
+run_watch VPN {
+	pidfile = "/var/run/openconnect.pid"
+	format = "  "
+	format_down = ""
+}
+
+wireless _first_ {
+	format_up = " 直 %essid "
+	format_down = " 睊 "
+	#format_up = "  %essid "
+	#format_down = "  Down "
+}
+
+ethernet _first_ {
+	format_up = "  %ip (%speed) "
+	format_down = "  "
+	#format_up = "  %ip (%speed) "
+	#format_down = "  Down "
+}
+
+battery 0 {
+	format = " %status %percentage "
+	hide_seconds = true
+	integer_battery_capacity = true
+	last_full_capacity = true
+	status_chr = " "
+	status_bat = " "
+	status_full = " "
+	#status_chr = " +"
+	#status_bat = ""
+	#status_full = ""
+}
+
+tztime local {
+	format = "  %a %d-%m-%Y   %H:%M "
+}

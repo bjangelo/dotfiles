@@ -1,0 +1,1 @@
+alias makecrefs='ctags -R; cscope -R -b -k -q'
