@@ -1,0 +1,280 @@
+colorscheme wombat256
+
+" Remember larger number of commands
+set history=1000
+" Make Vim more useful
+set nocompatible
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+" Enhance command-line completion
+set wildmenu
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*/.git/*
+" Allow cursor keys in insert mode
+set esckeys
+" Allow backspace in insert mode
+set backspace=indent,eol,start
+" Optimize for fast terminal connections
+set ttyfast
+" Use UTF-8 without BOM
+set encoding=utf-8 nobomb
+" No automatic newline at end of file
+" set binary
+" set noeol
+set fileformat=unix
+set fileformats=unix,dos
+" No octal increment/decrement
+set nrformats-=octal
+" Delete comment character when joining commented lines
+set formatoptions+=j
+" Change mapleader
+let mapleader=","
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+	set undodir=~/.vim/undo
+endif
+
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*
+
+" Respect modeline in files
+set modeline
+set modelines=4
+" Enable per-directory .vimrc files and disable unsafe commands in them
+set exrc
+set secure
+" Enable line numbers
+set number
+" Enable syntax highlighting
+syntax on
+" Highlight current line
+set cursorline
+" Make tabs as wide as eight spaces
+set tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 smarttab
+set autoindent
+set smartindent
+set smarttab
+" Sane line wrapping
+set nowrap
+set linebreak
+" Show “invisible” characters
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set nolist
+" Highlight searches
+set hlsearch
+" Ignore case of searches
+set ignorecase
+set smartcase
+" Highlight dynamically as pattern is typed
+set incsearch
+" Don't redraw while executing macros
+set lazyredraw
+" Always show status line
+set laststatus=2
+" Disable error bells
+set noerrorbells
+set novisualbell
+" Don’t reset cursor to start of line when moving around.
+set nostartofline
+" Show the cursor position
+set ruler
+" Don’t show the intro message when starting Vim
+set shortmess=atI
+" Show the current mode
+set showmode
+" Show the filename in the window titlebar
+set title
+" Show the (partial) command as it’s being typed
+set showcmd
+" Use relative line numbers
+if exists("&relativenumber")
+	set relativenumber
+endif
+" Start scrolling three lines before the horizontal window border
+set scrolloff=3
+set sidescrolloff=5
+set display+=lastline
+" Show matching brackets
+set showmatch
+set mat=2
+
+" Switching between buffers
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprevious<CR>
+
+" Auto re-read when file changed outside vim
+set autoread
+au FocusGained,BufEnter * checktime
+
+" Automatic commands
+if has("autocmd")
+	" Enable file type detection
+	filetype plugin indent on
+	autocmd FileType make set noexpandtab
+	autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+	autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab
+	autocmd FileType go set tabstop=8|set shiftwidth=8|set noexpandtab
+	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+
+	" Git branch for status line
+	function! GitBranch()
+		return trim(system("git -C " . expand("%:p:h") . " branch --show-current 2>/dev/null"))
+	endfunction
+	autocmd BufWinEnter * let b:git_branch = GitBranch()
+endif
+
+" Status line modes
+let g:currentmode={
+        \ '__' : '------',
+        \ 'n' : 'NORMAL',
+        \ 'no' : 'OP PENDING',
+        \ 'nov' : 'OP PENDING CHAR',
+        \ 'noV' : 'OP PENDING LINE',
+        \ 'no' : 'OP PENDING BLOCK',
+        \ 'niI' : 'INSERT (NORMAL)',
+        \ 'niR' : 'REPLACE (NORMAL)',
+        \ 'niV' : 'V REPLACE (NORMAL)',
+        \ 'v' : 'VISUAL',
+        \ 'V' : 'V-LINE',
+        \ '' : 'V-BLOCK',
+        \ 's' : 'SELECT',
+        \ 'S' : 'S-LINE',
+        \ '' : 'S-BLOCK',
+        \ 'i' : 'INSERT',
+        \ 'ic' : 'INSERT COMPL GENERIC',
+        \ 'ix' : 'INSERT COMPL',
+        \ 'R' : 'REPLACE',
+        \ 'Rc' : 'REPLACE COMP GENERIC',
+        \ 'Rv' : 'V REPLACE',
+        \ 'Rx' : 'REPLACE COMP',
+        \ 'c'  : 'COMMAND',
+        \ 'cv'  : 'VIM EX',
+        \ 'ce'  : 'EX',
+        \ 'r'  : 'PROMPT',
+        \ 'rm'  : 'MORE PROMPT',
+        \ 'r?'  : 'CONFIRM',
+        \ '!'  : 'SHELL',
+        \ 't'  : 'TERMINAL',
+        \ 'multi' : 'MULTI',
+        \ }
+
+" Status line colors
+hi User1 ctermfg=0 ctermbg=4
+hi User2 ctermfg=4 ctermbg=238
+hi User3 ctermfg=238 ctermbg=none
+hi User4 ctermfg=4 ctermbg=none
+
+function! StatusLineBranch()
+	let l:git_branch = get(b:, 'git_branch', '')
+	return len(l:git_branch) ? l:git_branch : '    '
+endfunction
+
+set statusline=
+set statusline+=%1*
+set statusline+=\ %{g:currentmode[mode()]}\ 
+set statusline+=%2*
+set statusline+=
+set statusline+=\ \ %{StatusLineBranch()}\ 
+set statusline+=%3*
+set statusline+=
+set statusline+=%4*
+set statusline+=\ %{&readonly?'\ ':''}%f\ %{&modified?'[+]':''}
+set statusline+=%*
+set statusline+=%=
+set statusline+=%4*
+set statusline+=\ %{&filetype}\ 
+set statusline+=%3*
+set statusline+=
+set statusline+=%2*
+set statusline+=\ %2p%%\ \ %02l/%L\ :\ %02v\ 
+set statusline+=
+set statusline+=%1*
+set statusline+=\ %{strftime('%a')}\ 
+set statusline+= 
+set statusline+=\ %{strftime('%H:%M')}\ 
+set statusline+=%*
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+	runtime! macros/matchit.vim
+endif
+
+" Switch tab width 2 (,2)
+function! SetTabWidth2()
+	:set tabstop=2
+	:set shiftwidth=2
+endfunction
+nnoremap <leader>2 :call SetTabWidth2()<CR>
+
+" Switch tab width 4 (,4)
+function! SetTabWidth4()
+	:set tabstop=4
+	:set shiftwidth=4
+endfunction
+nnoremap <leader>4 :call SetTabWidth4()<CR>
+
+" Switch tab width 8 (,8)
+function! SetTabWidth8()
+	:set tabstop=8
+	:set shiftwidth=8
+endfunction
+nnoremap <leader>8 :call SetTabWidth8()<CR>
+
+" Toggle tabs (,tt)
+function! ToggleTabs()
+	:set expandtab!
+endfunction
+nnoremap <leader>tt :call ToggleTabs()<CR>
+
+" Toggle columncolor (,cc)
+function! ToggleColumnColor()
+	if &colorcolumn
+		:set colorcolumn=
+	else
+		:set colorcolumn=80
+	endif
+endfunction
+nnoremap <leader>cc :call ToggleColumnColor()<CR>
+
+" Toggle all line numbering (,nn)
+function! ToggleLineNumering()
+	:set number!
+	:set relativenumber!
+endfunction
+nnoremap <leader>nn :call ToggleLineNumering()<CR>
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+	let save_cursor = getpos(".")
+	let old_query = getreg('/')
+	:%s/\s\+$//e
+	call setpos('.', save_cursor)
+	call setreg('/', old_query)
+endfunction
+nnoremap <leader>ss :call StripWhitespace()<CR>
+
+" Load cscope databases in parent directories
+function! LoadCscope()
+	let db = findfile("cscope.out", ".;")
+	if (!empty(db))
+		let path = strpart(db, 0, match(db, "/cscope.out$"))
+		set nocscopeverbose " suppress 'duplicate connection' error
+		exe "cs add " . db . " " . path
+		set cscopeverbose
+	endif
+endfunction
+au BufEnter /* call LoadCscope()
+
+" Generate cscope database (,rr)
+function! GenerateRefs()
+	let l:ext = expand("%:e")
+	if l:ext == "go"
+		:!make-go-refs
+	else
+		:!make-c-refs
+	endif
+	:call LoadCscope()
+endfunction
+nnoremap <leader>rr :call GenerateRefs()<CR>

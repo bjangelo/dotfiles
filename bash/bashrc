@@ -1,0 +1,55 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+if [ -e /usr/share/terminfo/a/alacritty ]; then
+        export TERM='alacritty'
+else
+        export TERM='xterm-256color'
+fi
+
+# prompt formatting
+[ -f ~/.git-prompt.sh ] && . ~/.git-prompt.sh
+if [ -n "$SSH_CLIENT" ]; then
+	PS1='\[\e[01;32m\]\u\[\e[m\] \[\e[01;31m\]@\[\e[m\] \[\e[00;32m\]\h\[\e[m\] \[\e[01;34m\]\w\[\e[m\] \[\e[01;31m\]$(__git_ps1 "(%s)")\[\e[m\]\n\[\e[01;37m\]\$\[\e[m\] '
+else
+	PS1='\[\e[01;32m\]\u\[\e[m\] \[\e[01;31m\]@\[\e[m\] \[\e[01;32m\]\h\[\e[m\] \[\e[01;34m\]\w\[\e[m\] \[\e[01;31m\]$(__git_ps1 "(%s)")\[\e[m\]\n\[\e[01;37m\]\$\[\e[m\] '
+fi
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+	if [ -f ~/.dir_colors ]; then
+		eval $(dircolors -b ~/.dir_colors)
+	else
+		eval $(dircolors -b)
+	fi
+
+	alias ls='ls --color=auto'
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
+
+	export GREP_COLORS='fn=1;34'
+fi
+
+# alias definitions
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+
+# programmable completion
+[ -f /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
