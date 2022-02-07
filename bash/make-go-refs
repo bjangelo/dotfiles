@@ -1,0 +1,4 @@
+#!/bin/bash
+ctags -R --languages=Go .
+find . -name "*.go" > cscope.files
+cscope -R -b -k -q

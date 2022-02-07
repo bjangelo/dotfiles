@@ -1,0 +1,17 @@
+if [ -z "$SSH_TTY" ]; then
+	if [ -z "$SSH_AUTH_SOCK" ]; then
+		eval $(/usr/bin/ssh-agent -s)
+		ssh-add ~/.ssh/id_ed25519
+	fi
+fi
+
+export EDITOR=vim
+export BROWSER=firefox
+export GTK_THEME=NordArc
+
+export GOPATH=~/code/go
+
+export PATH=$PATH:~/.local/bin
+export PATH=$PATH:$GOPATH/bin
+
+[ -f ~/.bashrc ] && . ~/.bashrc
