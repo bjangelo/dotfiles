@@ -1,0 +1,5 @@
+#!/bin/sh
+IMAGE=/home/bangelo/.config/wallpapers/lock.png
+grim "$IMAGE"
+mogrify -scale 3% -scale 3344% "$IMAGE"
+swaylock -i "$IMAGE"

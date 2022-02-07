@@ -1,0 +1,39 @@
+{
+  "layer": "top",
+  "height": 26,
+  "modules-left": ["niri/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["cpu", "memory", "disk", "network", "battery"],
+  "clock": {
+      "format": "{:%Y-%m-%d %H:%M}",
+      "tooltip": false
+  },
+  "cpu": {
+      "format": "CPU: {usage}%"
+  },
+  "disk": {
+    "path": "/",
+    "format": "Disk: {used} / {total}"
+  },
+  "memory": {
+      "format": "RAM: {used} / {total}"
+  },
+  "network": {
+      "format-wifi": "{ipaddr}",
+      "format-ethernet": "{ipaddr}"
+  },
+  "battery": {
+      "format": "{capacity}% {icon}",
+      "tooltip": false
+  },
+  "niri/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "sort-by-number": true
+  }
+}

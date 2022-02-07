@@ -1,0 +1,35 @@
+* {
+  font-family: "Pragmasevka Nerd Font";
+  background: transparent;
+  color: #6EBAF8;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#workspaces {
+  background: #2E3440;
+  margin-left: 20px;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+#workspaces button {
+  background: #2E3440;
+  margin-right: 10px;
+}
+
+#clock {
+  background: #2E3440;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+#cpu, #memory, #disk, #network, #battery {
+  background: #2E3440;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 0 10px;
+  border-radius: 10px;
+}

@@ -1,0 +1,25 @@
+if [ -z "$SSH_TTY" ]; then
+	if [ -z "$SSH_AUTH_SOCK" ]; then
+		eval $(/usr/bin/ssh-agent -s)
+		ssh-add ~/.ssh/id_ed25519
+	fi
+fi
+
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+	export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+	if [ ! -d "$XDG_RUNTIME_DIR" ]; then
+		mkdir -p "$XDG_RUNTIME_DIR"
+	fi
+	chmod 0700 "$XDG_RUNTIME_DIR"
+fi
+
+export EDITOR=vim
+export BROWSER=firefox
+export GTK_THEME=NordArc
+
+export GOPATH=~/code/go
+
+export PATH=$PATH:~/.local/bin
+export PATH=$PATH:$GOPATH/bin
+
+[ -f ~/.bashrc ] && . ~/.bashrc

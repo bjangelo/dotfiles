@@ -1,0 +1,13 @@
+font=Pragmasevka Nerd Font Bold 12
+background-color=#2E3440
+text-color=#6EBAF8
+border-color=#6EBAF8
+default-timeout=5000
+
+width=600
+height=300
+padding=10
+margin=15
+
+[urgency=high]
+text-color=#F7786D
