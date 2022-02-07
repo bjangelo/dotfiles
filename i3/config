@@ -1,0 +1,222 @@
+# Mod1 = Alt key on keyboard
+# Mod4 = Windows or Super key on keyboard
+set $mod Mod1
+
+# vim navigation bindings
+set $left h
+set $down j
+set $up k
+set $right l
+
+font pango:OperatorMono Nerd Font 0
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+
+# start dmenu
+bindsym $mod+d exec --no-startup-id dmenu_run -i -nf '#6EBAF8' -nb '#000000' -sb '#6EBAF8' -sf '#000000' -fn 'OperatorMonoBook:bold:pixelsize=18'
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exit
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# previous workspace
+workspace_auto_back_and_forth yes
+
+# move window workspace back and forth
+bindsym $mod+Shift+z move container to workspace back_and_forth; workspace back_and_forth
+
+# display pop-ups in fullscreen mode
+popup_during_fullscreen smart
+
+# make focused window a scratchpad
+bindsym $mod+Shift+equal move scratchpad
+
+# show first scratchpad window
+bindsym $mod+equal scratchpad show
+
+# split in horizontal orientation
+bindsym $mod+Shift+bar split h
+
+# split in vertical orientation
+bindsym $mod+Shift+underscore split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+	# These bindings trigger as soon as you enter the resize mode
+
+	# Pressing left will shrink the window’s width.
+	# Pressing right will grow the window’s width.
+	# Pressing up will shrink the window’s height.
+	# Pressing down will grow the window’s height.
+	bindsym $left resize shrink width 5 px or 5 ppt
+	bindsym $down resize grow height 5 px or 5 ppt
+	bindsym $up resize shrink height 5 px or 5 ppt
+	bindsym $right resize grow width 5 px or 5 ppt
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# brightness control
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+
+# volume control
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5- unmute
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5+ unmute
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
+
+# terminal
+bindsym $mod+Return exec --no-startup-id alacritty;focus
+
+# browser
+bindsym $mod+b exec --no-startup-id firefox
+bindsym $mod+Shift+b exec --no-startup-id firefox --private-window
+
+# screenshot
+bindsym $mod+p exec --no-startup-id scrot ~/pictures/screenshot_$(date +%F_%H-%M-%S).png
+bindsym $mod+Shift+p --release exec scrot -s ~/pictures/screenshot_$(date +%F_%H-%M-%S).png
+
+# lock screen
+bindsym $mod+Delete exec --no-startup-id "~/.i3lock"
+
+# bar toggle, hide or show
+bindsym $mod+i bar mode toggle
+
+bar {
+	height 25
+	position top
+	font pango:OperatorMono Nerd Font 12
+	status_command i3status
+	tray_padding 1
+	strip_workspace_numbers yes
+
+	colors {
+		background #000000
+		statusline #6EBAF8
+		separator  #000000
+
+		#                  border  background text
+		focused_workspace  #6EBAF8 #6EBAF8 #000000
+		active_workspace   #000000 #000000 #FFFFFF
+		inactive_workspace #1F1F1F #1F1F1F #B4B4B4
+		urgent_workspace   #F7786D #F7786D #000000
+		binding_mode       #F7786D #F7786D #000000
+	}
+}
+
+# colors
+# class                 border  bground text    indicator child_border
+client.focused          #6EBAF8 #6EBAF8 #000000 #B4B4B4   #6EBAF8
+client.focused_inactive #000000 #000000 #6EBAF8 #B4B4B4   #6EBAF8
+client.unfocused        #000000 #000000 #6EBAF8 #B4B4B4   #6EBAF8
+client.urgent           #F7786D #F7786D #000000 #B4B4B4   #F7786D
+client.placeholder      #000000 #000000 #6EBAF8 #000000   #6EBAF8
+
+client.background       #FFFFFF
+
+# i3-gaps
+for_window [class="^.*"] border pixel 2
+gaps inner 10
+gaps outer 1
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+	bindsym o      mode "$mode_gaps_outer"
+	bindsym i      mode "$mode_gaps_inner"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+	bindsym plus  gaps inner current plus 5
+	bindsym minus gaps inner current minus 5
+	bindsym 0     gaps inner current set 0
+
+	bindsym Shift+plus  gaps inner all plus 5
+	bindsym Shift+minus gaps inner all minus 5
+	bindsym Shift+0     gaps inner all set 0
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+	bindsym plus  gaps outer current plus 5
+	bindsym minus gaps outer current minus 5
+	bindsym 0     gaps outer current set 0
+
+	bindsym Shift+plus  gaps outer all plus 5
+	bindsym Shift+minus gaps outer all minus 5
+	bindsym Shift+0     gaps outer all set 0
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
