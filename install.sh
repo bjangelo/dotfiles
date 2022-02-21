@@ -52,7 +52,7 @@ link vim/pack/tpope ~/.vim/pack/tpope
 link vim/plugin/cscope_maps.vim ~/.vim/plugin/cscope_maps.vim
 link wallpapers/fehbg ~/.fehbg
 link wallpapers/lock ~/.i3lock
-link wallpapers/tower-nord.png ~/.config/wallpapers/tower-nord.png
+link wallpapers/nature.png ~/.config/wallpapers/nature.png
 link x11/xinitrc ~/.xinitrc
 link x11/Xresources ~/.Xresources
 
