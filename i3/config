@@ -33,7 +33,7 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run -i -nf '#6EBAF8' -nb '#000000' -sb '#6EBAF8' -sf '#000000' -fn 'OperatorMonoBook:bold:pixelsize=18'
+bindsym $mod+d exec --no-startup-id dmenu_run -i -nf '#BDE97C' -nb '#000000' -sb '#BDE97C' -sf '#000000' -fn 'OperatorMonoBook:bold:pixelsize=18'
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -156,11 +156,11 @@ bar {
 
 	colors {
 		background #000000
-		statusline #6EBAF8
+		statusline #BDE97C
 		separator  #000000
 
 		#                  border  background text
-		focused_workspace  #6EBAF8 #6EBAF8 #000000
+		focused_workspace  #BDE97C #BDE97C #000000
 		active_workspace   #000000 #000000 #FFFFFF
 		inactive_workspace #1F1F1F #1F1F1F #B4B4B4
 		urgent_workspace   #F7786D #F7786D #000000
@@ -170,11 +170,11 @@ bar {
 
 # colors
 # class                 border  bground text    indicator child_border
-client.focused          #6EBAF8 #6EBAF8 #000000 #B4B4B4   #6EBAF8
-client.focused_inactive #000000 #000000 #6EBAF8 #B4B4B4   #6EBAF8
-client.unfocused        #000000 #000000 #6EBAF8 #B4B4B4   #6EBAF8
+client.focused          #BDE97C #BDE97C #000000 #B4B4B4   #BDE97C
+client.focused_inactive #000000 #000000 #BDE97C #B4B4B4   #BDE97C
+client.unfocused        #000000 #000000 #BDE97C #B4B4B4   #BDE97C
 client.urgent           #F7786D #F7786D #000000 #B4B4B4   #F7786D
-client.placeholder      #000000 #000000 #6EBAF8 #000000   #6EBAF8
+client.placeholder      #000000 #000000 #BDE97C #000000   #BDE97C
 
 client.background       #FFFFFF
 
