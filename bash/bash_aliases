@@ -1,0 +1,10 @@
+sshlogineu() {
+	tsh login --auth=corporate --proxy=eu-root-teleport-proxy.tesla.com
+	tsh login ams15-cluster
+	cp -R ~/.tsh/keys/eu-root-teleport-proxy.tesla.com/`id -un`@tesla.com ~/.tsh/keys/eu-root-teleport-proxy.tesla.com/`id -un`@tesla.com-ssh/ams15-cluster
+	tsh login ber02-cluster
+	cp -R ~/.tsh/keys/eu-root-teleport-proxy.tesla.com/`id -un`@tesla.com ~/.tsh/keys/eu-root-teleport-proxy.tesla.com/`id -un`@tesla.com-ssh/ber02-cluster
+	tsh login ber03-cluster
+	cp -R ~/.tsh/keys/eu-root-teleport-proxy.tesla.com/`id -un`@tesla.com ~/.tsh/keys/eu-root-teleport-proxy.tesla.com/`id -un`@tesla.com-ssh/ber03-cluster
+	tsh login eu-root-cluster
+}

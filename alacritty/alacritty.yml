@@ -33,7 +33,7 @@ font:
     family: Operator Mono Medium
   italic:
     family: Operator Mono
-  size: 9
+  size: 12
 
 window:
   opacity: 0.9

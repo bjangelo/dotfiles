@@ -53,3 +53,5 @@ fi
 
 # programmable completion
 [ -f /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+export GOPATH=~/code/go

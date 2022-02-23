@@ -2,16 +2,35 @@ if [ -z "$SSH_TTY" ]; then
 	if [ -z "$SSH_AUTH_SOCK" ]; then
 		eval $(/usr/bin/ssh-agent -s)
 		ssh-add ~/.ssh/id_ed25519
+		ssh-add ~/.ssh/id_rsa
 	fi
 fi
 
 export EDITOR=vim
-export BROWSER=firefox
-export GTK_THEME=NordArc
+export BROWSER=chromium
 
 export GOPATH=~/code/go
 
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:~/.krew/bin
+export PATH=$PATH:/opt/utimaco/SecurityServer/bin
+
+export ADMIN_KEY=/opt/utimaco/SecurityServer/ADMIN.key
+export BANGELO_KEY=/opt/utimaco/SecurityServer/bangelo.key
+
+export CHROME_FLAGS="--enable-accelerated-video-decode \
+--enable-accelerated-mjpeg-decode \
+--enable-features=VaapiVideoEncoder,VaapiVideoDecoder"
+
+export GOOGLE_API_KEY=no
+export GOOGLE_DEFAULT_CLIENT_ID=no
+export GOOGLE_DEFAULT_CLIENT_SECRET=no
+
+export GOPRIVATE=*.teslamotors.com,*.tesla.com
+
+export VAULT_ADDR='https://fleetnet-vault.ops.america.vn.tesla.com'
+
+export KUBECONFIG=~/.kube/config:$(ls -A1 ~/.kube/*.config.yml | tr '\n' :)
 
 [ -f ~/.bashrc ] && . ~/.bashrc

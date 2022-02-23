@@ -8,8 +8,8 @@ if [ -f ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap
 fi
 
-if [ -x /usr/local/bin/external_display ]; then
-	/usr/local/bin/external_display
+if [ -x /usr/local/bin/external-display ]; then
+	/usr/local/bin/external-display
 fi
 
 # wallpaper

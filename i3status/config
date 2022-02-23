@@ -18,6 +18,7 @@ order += "volume master"
 order += "load"
 order += "memory"
 order += "disk /"
+order += "run_watch VPN"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery 0"
@@ -44,6 +45,12 @@ memory {
 disk "/" {
 	format = "  %free "
 	#format = "  %free "
+}
+
+run_watch VPN {
+	pidfile = "/var/run/openconnect.pid"
+	format = "  "
+	format_down = ""
 }
 
 wireless _first_ {

@@ -1,8 +1,15 @@
 [user]
-	email = bangelo@gmail.com
+	email = bangelo@tesla.com
 	name = Bryan Angelo
 [core]
 	editor = vim
-	autocrlf = input
+	autocrlf = false
 [alias]
 	hist = log --date=short --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(reset)[%an] %C(blue)%d%C(reset)'
+[url "ssh://git@github-fw.tesla.com"]
+	insteadOf = https://github-fw.tesla.com
+[url "ssh://git@stash.teslamotors.com:7999"]
+	insteadOf = https://stash.teslamotors.com/scm
+[url "ssh://eu1.ultramobile-kits.org:29418/"]
+	insteadOf=ssh://127.0.1.10/
+	insteadOf=ssh://127.0.1.10:29418/
